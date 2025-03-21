@@ -30,7 +30,7 @@
    });
    ```
 
-   Defining tighter restrictions is done by simply specifing the expected extensions:
+   Defining tighter restrictions is done by simply specifing only the wanted extensions:
 
    ```js
    import Document from '@tiptap/extension-document'
@@ -38,8 +38,8 @@
    import Text from '@tiptap/extension-text'
 
    const html = `
-      <p>Some paragraph</p> // Will render as normal
-      <strong>Some bold text<strong> // Will not render as bold
+      <p>Some paragraph</p> /* Will render as normal */
+      <strong>Some bold text<strong> /* Will not render as bold */
    `
 
    const extensions = [
@@ -55,3 +55,6 @@
    ```
 
    Content not defined in the schema will, in most cases, be added without marks/nodes.
+
+5. **Importing/Pasting Word Documents**
+   Pasting from word is fairly painless, since TipTap will automatically drop/unformat content that is unsupported. A plugin has also been written that provides further support for word document structures (providing they are also supported by the extensions you supply). There is no image handling, since tiptap does not parse images by default. Images can be added with the Image module, however we would need to add our own extension for managing uploads of those images. In our use case, this would likely not be nessesary as we would only support adding a logo, of which we would already have the URLs for.

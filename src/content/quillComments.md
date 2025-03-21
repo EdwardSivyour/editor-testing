@@ -9,7 +9,7 @@
    There is no built-in HTML viewer (like TinyMCE has, for example). We would need to build this in ourselves.
 
 3. **Accessing Content**
-   Accessing quills content is fairly straigtforward, as quill fires an update event with the content
+   Accessing quills content is fairly straigtforward, as quill fires an update event with the content.
 
 4. **Content Control**
    Much like TipTap, quill allows you to import modules (called Formats), which is handled in much the same way:
@@ -28,3 +28,5 @@
       formats: ['header', 'bold', 'italic', 'underline', 'list', 'link', 'code-block', 'image'],
    });
    ```
+5. **Importing/Pasting Word Documents**
+   Word document support is good out of the box. Again, you would need to ensure you are supplying the formats you want to keep, as everything else will be dropped. Images are also support via the Image format, as these are stored in the document structure as base64, although we likely do not want this.

@@ -65,32 +65,6 @@ function App() {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };
 
-  const toggleStyles = {
-    border: "none",
-    borderRadius: "100%",
-    position: "fixed",
-    top: "10px",
-    right: "10px",
-    width: "40px",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  };
-
-  useEffect(
-    () => console.log("[TIPTAP CONTENT CHANGE]", tiptapContent),
-    [tiptapContent]
-  );
-  useEffect(
-    () => console.log("[QUILL CONTENT CHANGE]", quillContent),
-    [quillContent]
-  );
-  useEffect(
-    () => console.log("[LEXICAL CONTENT CHANGE]", lexicalContent),
-    [lexicalContent]
-  );
 
   const handleOpenCommentsModal = (comments) => {
     switch (comments) {

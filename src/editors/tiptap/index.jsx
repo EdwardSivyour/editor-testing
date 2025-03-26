@@ -1,18 +1,56 @@
 import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Link from '@tiptap/extension-link'
+
 import MenuBar from "./MenuBar";
 import React, { useEffect, useContext } from "react";
 import "./tiptapeditorstyles.css";
+
+import StarterKit from "@tiptap/starter-kit"; 
+/* Includes the following extensions:
+  - [NODES]:
+    - Blockquote, 
+    - BulletList, 
+    - CodeBlock, 
+    - Document, 
+    - HardBreak, 
+    - Heading, 
+    - HorizontalRule, 
+    - ListItem, 
+    - OrderedList, 
+    - Paragraph, 
+    - Text,
+  - [MARKS]: 
+    - Bold, 
+    - Code, 
+    - Italic, 
+    - Strike 
+*/
+import Underline from '@tiptap/extension-underline'
+import Link from '@tiptap/extension-link'
 import Image from "@tiptap/extension-image";
+// Advanced extensions
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
+import Subscript from '@tiptap/extension-subscript'
+import Superscript from '@tiptap/extension-superscript'
+
 import OfficePaste from "@intevation/tiptap-extension-office-paste";
+
 import { ContentContext } from "../../App";
 
 const extensions = [
-  OfficePaste,
   StarterKit,
-  Image,
   Link,
+  Image,
+  OfficePaste,
+  Underline,
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
+  Subscript,
+  Superscript,
 ];
 
 const TiptapEditor = ({defaultContent}) => {
@@ -21,15 +59,12 @@ const TiptapEditor = ({defaultContent}) => {
   const editor = useEditor({
     extensions: extensions,
     content: defaultContent,
-  });
+    onUpdate: ({ editor }) => {
+      setTiptapContent(editor.getHTML());
+    },
 
-  useEffect(() => {
-    if (editor) {
-      editor.on('update', () => {
-        setTiptapContent(editor.getHTML());
-      });
-    }
-  }, [editor, setTiptapContent]);
+    history: true,
+  });
 
   return (
     <>

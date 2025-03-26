@@ -1,19 +1,22 @@
-import UndoIcon from '@mui/icons-material/Undo';
-import RedoIcon from '@mui/icons-material/Redo';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import FormatBoldIcon from '@mui/icons-material/FormatBold';
-import FormatItalicIcon from '@mui/icons-material/FormatItalic';
-import FormatStrikethroughIcon from '@mui/icons-material/FormatStrikethrough';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import CodeIcon from '@mui/icons-material/Code';
-import CodeOffIcon from '@mui/icons-material/CodeOff';
+import UndoIcon from "@mui/icons-material/Undo";
+import RedoIcon from "@mui/icons-material/Redo";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import FormatBoldIcon from "@mui/icons-material/FormatBold";
+import FormatItalicIcon from "@mui/icons-material/FormatItalic";
+import FormatStrikethroughIcon from "@mui/icons-material/FormatStrikethrough";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
+import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
+
+// table icons
+
+import SuperscriptIcon from "@mui/icons-material/Superscript";
+import SubScriptIcon from "@mui/icons-material/Subscript";
 
 import React from "react";
 
 const MenuBar = ({ editor }) => {
-
   return (
     <>
       <div className="control-group">
@@ -39,7 +42,14 @@ const MenuBar = ({ editor }) => {
           >
             <FormatStrikethroughIcon />
           </button>
-          </div>
+          <button
+            onClick={() => editor.chain().focus().toggleUnderline().run()}
+            disabled={!editor.can().chain().focus().toggleUnderline().run()}
+            className={editor.isActive("underline") ? "is-active" : ""}
+          >
+            <FormatUnderlinedIcon />
+          </button>
+        </div>
         <div className="button-group">
           <button
             onClick={() => editor.chain().focus().setParagraph().run()}
@@ -147,11 +157,50 @@ const MenuBar = ({ editor }) => {
             <RedoIcon />
           </button>
         </div>
-        {/* <div className="button-group">
-          <button onClick={logContent}>
-            [DEBUG] Log content
+      </div>
+      {/* Advanced Features */}
+      <div className="control-group">
+        <div className="button-group">
+          <button
+            onClick={() => editor.chain().focus().toggleSubscript().run()}
+            disabled={!editor.can().chain().focus().toggleSubscript().run()}
+            className={editor.isActive("subscript") ? "is-active" : ""}
+          >
+            <SubScriptIcon />
           </button>
-        </div> */}
+          <button
+            onClick={() => editor.chain().focus().toggleSuperscript().run()}
+            disabled={!editor.can().chain().focus().toggleSuperscript().run()}
+            className={editor.isActive("superscript") ? "is-active" : ""}
+          >
+            <SuperscriptIcon />
+          </button>
+        </div>
+        {/* tables */}
+        <div className="button-group">
+          <button
+            onClick={() =>
+              editor.chain().focus().insertTable({ rows: 3, cols: 3 }).run()
+            }
+          >
+            Add Table
+          </button>
+          <button onClick={() => editor.chain().focus().addColumnAfter().run()}>
+            Add Column
+          </button>
+          <button onClick={() => editor.chain().focus().addRowAfter().run()}>
+            Add Row
+          </button>
+          <button onClick={() => editor.chain().focus().deleteColumn().run()}>
+            Delete Column
+          </button>
+          <button onClick={() => editor.chain().focus().deleteRow().run()}>
+            Delete Row
+          </button>
+          <button onClick={() => editor.chain().focus().deleteTable().run()}>
+            Delete Table
+          </button>
+        </div>
       </div>
     </>
   );

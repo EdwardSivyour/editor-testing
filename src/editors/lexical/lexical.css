@@ -1,3 +1,7 @@
+:root[data-theme='light'] .editor-input{
+  background-color: #f5f5f5;
+}
+
 .editor-input {
   padding: 10px;
   border-radius: 4px;

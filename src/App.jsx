@@ -5,12 +5,16 @@ import QuillEditor from "./editors/quill";
 import LexicalEditor from "./editors/lexical";
 import CommentsModal from "./components/CommentsModal";
 import PreviewModal from "./components/PreviewModal";
+
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 import TipTapComments from "./content/tiptapComments.md?raw";
 import QuillComments from "./content/quillComments.md?raw";
 import LexicalComments from "./content/lexicalComments.md?raw";
+import { BorderRight } from "@mui/icons-material";
 
 const defaultContent = `
  <h1>This is a heading</h1>
@@ -47,10 +51,47 @@ function App() {
   const [tiptapContent, setTiptapContent] = useState(defaultContent);
   const [quillContent, setQuillContent] = useState(defaultContent);
   const [lexicalContent, setLexicalContent] = useState(defaultContent);
-  
-  useEffect(() => console.log("[TIPTAP CONTENT CHANGE]", tiptapContent), [tiptapContent]);
-  useEffect(() => console.log("[QUILL CONTENT CHANGE]", quillContent), [quillContent]);
-  useEffect(() => console.log("[LEXICAL CONTENT CHANGE]", lexicalContent), [lexicalContent]);
+
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "dark"
+  );
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  };
+
+  const toggleStyles = {
+    color: theme === "dark" ? "#fff" : "#333",
+    border: "none",
+    borderRadius: "100%",
+    position: "fixed",
+    top: "10px",
+    right: "10px",
+    width: "40px",
+    height: "40px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  };
+
+  useEffect(
+    () => console.log("[TIPTAP CONTENT CHANGE]", tiptapContent),
+    [tiptapContent]
+  );
+  useEffect(
+    () => console.log("[QUILL CONTENT CHANGE]", quillContent),
+    [quillContent]
+  );
+  useEffect(
+    () => console.log("[LEXICAL CONTENT CHANGE]", lexicalContent),
+    [lexicalContent]
+  );
 
   const handleOpenCommentsModal = (comments) => {
     switch (comments) {
@@ -96,6 +137,9 @@ function App() {
   return (
     <div>
       <h1>Editor Testing</h1>
+      <button style={toggleStyles} onClick={toggleTheme}>
+        {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+      </button>
       <div>
         <p>Demos and breakdowns for different editors.</p>
       </div>
@@ -132,7 +176,7 @@ function App() {
         </div>
         <LexicalEditor defaultContent={defaultContent} />
         <hr />
-        
+
         {/* Quill Editor */}
         <div className="header">
           <h2>Quill Editor Example</h2>

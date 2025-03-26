@@ -1,9 +1,20 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import Quill from 'quill';
-import './quill.smoke.css';
+// import './quill.smoke.css';
+// import 'quill/dist/quill.snow.css';
 import { ContentContext } from '../../App';
 
 const QuillEditor = ({ defaultContent }) => {
+  // Dynamically import Quill CSS based on theme set in localStorage
+   useEffect(() => {
+     const theme = localStorage.getItem('theme') || 'dark';
+     if (theme === 'dark') {
+       import('./quill.smoke.css');
+     } else {
+       import('quill/dist/quill.snow.css');
+     }
+   }, []);
+
   const { setQuillContent } = useContext(ContentContext);
   const editorRef = useRef(null);
 

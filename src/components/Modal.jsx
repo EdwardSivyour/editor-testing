@@ -19,7 +19,7 @@ export default function Modal({ handleClose, fullScreen, children }) {
 
   return (
     <div className="modal">
-      <button className="close-icon" onClick={handleClose}>
+      <button className="floating-button" onClick={handleClose}>
         <CloseIcon />
       </button>
       <div className={`${fullScreen && 'fullscreen'} modal-content`}>{children}</div>

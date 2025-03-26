@@ -66,7 +66,6 @@ function App() {
   };
 
   const toggleStyles = {
-    color: theme === "dark" ? "#fff" : "#333",
     border: "none",
     borderRadius: "100%",
     position: "fixed",
@@ -137,7 +136,7 @@ function App() {
   return (
     <div>
       <h1>Editor Testing</h1>
-      <button style={toggleStyles} onClick={toggleTheme}>
+      <button className="floating-button" onClick={toggleTheme}>
         {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
       </button>
       <div>

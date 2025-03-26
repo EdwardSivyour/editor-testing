@@ -14,10 +14,6 @@ import React from "react";
 
 const MenuBar = ({ editor }) => {
 
-  const logContent = () => {
-    console.log(editor.getHTML());
-  }
-
   return (
     <>
       <div className="control-group">

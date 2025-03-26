@@ -7,6 +7,8 @@ import Modal from './Modal';
 
 export default function PreviewModal({ handleClose, htmlContent }) {
 
+  console.log("[HTML CONTENT]", htmlContent);
+
   const beautifiedHtml = beautifyHtml(htmlContent, {
     indent_size: 2,
     wrap_line_length: 80,

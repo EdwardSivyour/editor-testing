@@ -10,6 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import TipTapComments from "./content/tiptapComments.md?raw";
 import QuillComments from "./content/quillComments.md?raw";
+import LexicalComments from "./content/lexicalComments.md?raw";
 
 const defaultContent = `
  <h1>This is a heading</h1>
@@ -46,10 +47,10 @@ function App() {
   const [tiptapContent, setTiptapContent] = useState(defaultContent);
   const [quillContent, setQuillContent] = useState(defaultContent);
   const [lexicalContent, setLexicalContent] = useState(defaultContent);
-
-  useEffect(() => console.log(tiptapContent), [tiptapContent]);
-  useEffect(() => console.log(quillContent), [quillContent]);
-  useEffect(() => console.log(lexicalContent), [lexicalContent]);
+  
+  useEffect(() => console.log("[TIPTAP CONTENT CHANGE]", tiptapContent), [tiptapContent]);
+  useEffect(() => console.log("[QUILL CONTENT CHANGE]", quillContent), [quillContent]);
+  useEffect(() => console.log("[LEXICAL CONTENT CHANGE]", lexicalContent), [lexicalContent]);
 
   const handleOpenCommentsModal = (comments) => {
     switch (comments) {
@@ -62,7 +63,7 @@ function App() {
         setShowCommentsModal(true);
         break;
       case "lexical":
-        setComments("");
+        setComments(LexicalComments);
         setShowCommentsModal(true);
         break;
       default:
@@ -82,7 +83,7 @@ function App() {
         setShowPreviewModal(true);
         break;
       case "lexical":
-        setPreview("");
+        setPreview(lexicalContent);
         setShowPreviewModal(true);
         break;
       default:

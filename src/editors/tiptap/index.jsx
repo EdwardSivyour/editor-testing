@@ -2,7 +2,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 
 import MenuBar from "./MenuBar";
 import React, { useEffect, useContext } from "react";
-import "./tiptapeditorstyles.css";
+import "./tiptapeditorstyles.scss";
 
 import StarterKit from "@tiptap/starter-kit"; 
 /* Includes the following extensions:
@@ -45,7 +45,9 @@ const extensions = [
   Image,
   OfficePaste,
   Underline,
-  Table,
+  Table.configure({
+    resizable: true,
+  }),
   TableCell,
   TableHeader,
   TableRow,
